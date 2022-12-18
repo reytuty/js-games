@@ -5,8 +5,6 @@ export class Player{
         this.game = game;
         this.width = 100;
         this.height = 100;
-        this.image = new Image();
-        this.image.src = './assets/players.jpeg';
         this.x = 0;
         this.y = this.game.height - this.height;
         this.lastDrawSquare = {x:0, y:0, w:this.width, h: this.height}

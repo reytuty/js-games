@@ -1,9 +1,10 @@
 import { Keys } from './inputHandler.js'
 const states = {
-    SITTING: 0,
-    RUNNING: 1,
-    JUMPING: 2,
-    FALLING: 3
+    IDLE: 0,
+    SITTING: 1,
+    RUNNING: 2,
+    JUMPING: 3,
+    FALLING: 4
 }
 export class FrameInfo{
     constructor(x, y, w, h, image){
@@ -116,6 +117,27 @@ export class Falling extends State{
     handlerInput(input){
         if(input.ArrowDown){
             //TODO: power to down quickly
+        }
+    }
+}
+export class Idle extends State{
+    constructor(player){
+        super('IDLE', new PlayerAnimation([
+            new FrameInfo(0, 0, 100, 100)
+        ]));
+        this.player = player;
+    }
+    /**
+     * 
+     * @param {Keys} input 
+     */
+    handlerInput(input){
+        if(input.ArrowLeft || input.ArrowRight){
+            this.player.setState(states.RUNNING);
+            return;
+        }
+        if(input.ArrowDown){
+            this.player.setState(states.SITTING);
         }
     }
 }
